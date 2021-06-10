@@ -6,7 +6,15 @@ using UnityEngine;
 
 public static class YellowGameEventCenter
 {
-    private static Dictionary<string, List<Delegate>> _gameEvents;
+    public enum GameState 
+    {
+        GameStart, 
+        GamePause,
+        GameStore,
+        GameExit,
+        GameEnd
+    }
+    private static Dictionary<GameState, List<Delegate>> _gameEvents;
     private static bool _isCenterInit;
     public static void EventCenterInit()
     {
@@ -14,11 +22,11 @@ public static class YellowGameEventCenter
         {
             return;
         }
-        _gameEvents = new Dictionary<string, List<Delegate>>();
+        _gameEvents = new Dictionary<GameState, List<Delegate>>();
         _isCenterInit = true;
     }
 
-    public static void AddEvent<T>(string eventName, Action<T> callback)
+    public static void AddEvent<T>(GameState eventName, Action<T> callback)
     {
         //eventName已存在
         if (_gameEvents.TryGetValue(eventName, out var actions))
@@ -33,7 +41,7 @@ public static class YellowGameEventCenter
         }
     }
 
-    public static void AddEvent(string eventName, Action callback)
+    public static void AddEvent(GameState eventName, Action callback)
     {
         //eventName已存在
         if (_gameEvents.TryGetValue(eventName, out var actions))
@@ -48,7 +56,7 @@ public static class YellowGameEventCenter
         }
     }
 
-    public static void RemoveEvent<T>(string eventName, Action<T> callback)
+    public static void RemoveEvent<T>(GameState eventName, Action<T> callback)
     {
         if (!_gameEvents.TryGetValue(eventName, out var actions)) return;
         actions.Remove(callback);
@@ -58,7 +66,7 @@ public static class YellowGameEventCenter
         }
     }
 
-    public static void RemoveEvent(string eventName, Action callback)
+    public static void RemoveEvent(GameState eventName, Action callback)
     {
         if (!_gameEvents.TryGetValue(eventName, out var actions)) return;
         actions.Remove(callback);
@@ -68,7 +76,7 @@ public static class YellowGameEventCenter
         }
     }
 
-    public static void DispatchEvent(string eventName)
+    public static void DispatchEvent(GameState eventName)
     {
         if (!_gameEvents.ContainsKey(eventName)) return;
         _gameEvents.TryGetValue(eventName, out var actions);
@@ -80,7 +88,7 @@ public static class YellowGameEventCenter
         }
     }
 
-    public static void DispatchEvent<T>(string eventName, T arg)
+    public static void DispatchEvent<T>(GameState eventName, T arg)
     {
         if (!_gameEvents.ContainsKey(eventName)) return;
         _gameEvents.TryGetValue(eventName, out var actions);

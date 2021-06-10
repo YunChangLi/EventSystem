@@ -69,12 +69,8 @@
     <Compile Include="Assets\Scripts\BehaviorSystem\PlayerBehavior\PlayerUI.cs" />
     <Compile Include="Assets\Scripts\GameEvent\IEventData.cs" />
     <Compile Include="Assets\Scripts\GameEvent\YellowGameEventCenter.cs" />
-    <Compile Include="Assets\Scripts\Iobserver.cs" />
-    <Compile Include="Assets\Scripts\Monster.cs" />
-    <Compile Include="Assets\Scripts\NotificationSystem.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Gaming.cs" />
     <Compile Include="Assets\Scripts\Singleton\YellowMonoSingleton.cs" />
-    <Compile Include="Assets\Scripts\UI.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.7f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
